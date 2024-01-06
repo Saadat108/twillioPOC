@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="index.js"></script>
+    <script src="excelHandler.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="generateFakeChart2()">update chart btn</button>
+    <label for="startDate">Start Date:</label>
+
+    <input type="date" id="startDate">
+
+    <label for="endDate">End Date:</label>
+
+    <input type="date" id="endDate">
+
+    <button onclick="showSelectedDates()">Show Selected Dates</button>
+
+    <p id="selectedDates"></p>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height: 200px;">
+           <div class="col-8">
+              <div class="date-range-selector">
+                 <div class="date-input">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" class="form-control" id="start-date">
+                 </div>
+                 <div class="date-input">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" class="form-control" id="end-date">
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+           <div class="col-4">
+              <button type="button" class="btn btn-apply">Apply Date Range</button>
+           </div>
+        </div>
+    </div>
+
+
+    <!-- <canvas id="barChart"></canvas>
+    <canvas id="pieChart"></canvas>
+    <canvas id="doughnutChart"></canvas> -->
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
+                    <div class="col-6">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-6">
+                    <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    
+    <div>
+        <input type="file" id="fileInput">
+    </div>    
+    
+
+
+</body>
+<script src="barchart.js"></script>
+<script>
+    
+    function showSelectedDates() {
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+
+        // Add one day to end date without using new Date
+        const adjustedEndDate = endDate ? new Date(endDate).toISOString().slice(0, 10) : null; // Convert to string and manipulate
+        const parsedEndDate = adjustedEndDate ? new Date(adjustedEndDate) : null; // Convert back to Date object
+        const adjustedDay = parsedEndDate ? parsedEndDate.getDate() + 1 : null;
+        const finalEndDate = adjustedDay ? new Date(parsedEndDate.setDate(adjustedDay)).toISOString().slice(0, 10) : null;
+
+        const endDatePlusOne = endDate ? endDate.split("-").map((part, index) => index === 2 ? +part + 1 : part).join("-") : null;
+
+        // both endDatePlusOne and and finalEndDate works for getting endDate+1
+
+        // Print raw values and console output
+        console.log("Raw start date:", startDate);
+        console.log("Raw end date (before adjustment):", endDate);
+        console.log("Raw end date (after adjustment):", finalEndDate);
+        console.log("end date + 1: ", endDate+1);
+        console.log("endDatePlusOne: ", endDatePlusOne);
+
+        // Display selected date range
+        document.getElementById("selectedDates").textContent = "Selected Date Range: " + startDate + " to " + finalEndDate;
+
+        getMessages();
+        
+    }
+    sendText(['01798608124'],'apni bhalo manush, let us get rich AF');
+</script>
+</html>

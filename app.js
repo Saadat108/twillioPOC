@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 app.use(bodyParser.json());
-// app.use(express.static('./public'));
+app.use(express.static('./frontend'));
 app.use(cors());
 
 
@@ -22,7 +22,11 @@ app.use(cors());
     1. Genaral get function for testing server availability status
 */
 app.get('/',async function(req, res){
-  res.sendFile(path.join(__dirname, './frontend/sms_send.html'));
+  res.sendFile(path.join(__dirname, './index.html'));
+});
+
+app.get('/dashboard',async function(req, res){
+  res.sendFile(path.join(__dirname, 'frontend/textShaman.html'));
 });
 
 app.get('/test-api', async function(req, res){
