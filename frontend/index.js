@@ -1,7 +1,9 @@
 async function getMessages(startDate="", endDate="", to="", from="", deliveryStatus="", byMsgId="", limit="", smsId=""){
     // this function is to get messages, but default all the params have empty strings
 
-    console.log('inside AJAX',startDate, endDate, to, from)
+    console.log('inside AJAX',startDate, endDate, to, from);
+    console.log('to: ', to);
+    console.log('from: ', from);
     const callUrl = "http://localhost:8080/sms"
     // var data = {startDate:startDate, end};
     var res = $.ajax({
@@ -10,8 +12,8 @@ async function getMessages(startDate="", endDate="", to="", from="", deliverySta
         data: {
           startDate: startDate,  
           endDate: endDate,
-          to: to,
-          from: from,
+          toNumber: to,
+          fromNumber: from,
           // deliveryStatus: deliveryStatus,
           // byMsgId: byMsgId,
           // limit: limit,
@@ -26,8 +28,12 @@ async function getMessages(startDate="", endDate="", to="", from="", deliverySta
           const dataPass = response.chartData.deliveredCountPerDateArray;
           const dataFail = response.chartData.undeliveredCountPerDateArray;
           const dataGoing = response.chartData.sentCountPerDateArray;
+
+          const tableData = response.twilioData;
+
           console.log(labels, dataPass, dataFail, dataGoing)
           generateChart(labels, dataPass, dataFail, dataGoing)
+          populateDataTable(tableData);
           // You can process and display the response data as needed
         },
         error: function(jqXHR, textStatus, errorThrown) {
