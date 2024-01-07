@@ -118,6 +118,15 @@ function generateChart(labels, dataPass, dataFail, dataGoing){
         chartState.barChart.data.datasets[1].data = dataFail;
         chartState.barChart.data.datasets[2].data = dataGoing;
         chartState.barChart.update()
+
+        const totPass = dataPass.reduce((acc,num) => acc+num, 0);
+        const totFail = dataFail.reduce((acc,num) => acc+num, 0);
+        const totGoing = dataGoing.reduce((acc,num) => acc+num, 0);
+
+        chartState.pieChart.data.datasets[0].data = [totPass, totFail, totGoing];
+        chartState.doughnutChart.data.datasets[0].data = [totPass, totFail, totGoing];
+        chartState.pieChart.update();
+        chartState.doughnutChart.update();
     }
 
 }
