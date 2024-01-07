@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="index.js"></script>
     <script src="excelHandler.js"></script>
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <button onclick="generateFakeChart2()">update chart btn</button>
@@ -26,6 +26,8 @@
     <input type="date" id="endDate">
 
     <button onclick="showSelectedDates()">Show Selected Dates</button>
+
+    
 
     <p id="selectedDates"></p>
 
@@ -44,12 +46,30 @@
               </div>
            </div>
         </div>
-        <div class="row justify-content-center mt-4">
-           <div class="col-4">
-              <button type="button" class="btn btn-apply">Apply Date Range</button>
-           </div>
-        </div>
+
     </div>
+
+    <div class="container text-center mb-5">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="form-group">
+              <label for="fromNumber">From Number</label>
+              <input type="text" class="form-control bg-light text-muted" id="fromNumber" placeholder="Enter from number">
+            </div>
+            <div class="form-group">
+              <label for="toNumber">To Number</label>
+              <input type="text" class="form-control bg-light text-muted" id="toNumber" placeholder="Enter to number">
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-4">
+               <button type="button" class="btn btn-apply btn-primary">Apply Date Range</button>
+            </div>
+         </div>
+      </div>
+
+    
 
 
     <!-- <canvas id="barChart"></canvas>

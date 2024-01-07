@@ -9,6 +9,9 @@ function initiateChart(labels, dataPass, dataFail, dataGoing){
     const pieCt = document.getElementById('pieChart').getContext('2d');
     const doughnutCt = document.getElementById('doughnutChart').getContext('2d');
 
+    const totPass = dataPass.reduce((acc,num) => acc+num, 0);
+    const totFail = dataFail.reduce((acc,num) => acc+num, 0);
+    const totGoing = dataGoing.reduce((acc,num) => acc+num, 0);
     
 
     data = {
@@ -72,7 +75,7 @@ function initiateChart(labels, dataPass, dataFail, dataGoing){
     
     pieData = {
         datasets: [{
-            data: [10, 20, 30]
+            data: [totPass, totFail, totGoing]
         }],
     
         // These labels appear in the legend and in the tooltips when hovering different arcs
@@ -120,6 +123,7 @@ function generateChart(labels, dataPass, dataFail, dataGoing){
 }
 
 function generateFakeChart(){
+  // this is for generating a fake test case with the data stated below
     const fakeLabels = ['1day','2day','3day','4day','5day','6day','7day']
     const fakePass = [1,3,5,7,9,11,13];
     const fakeFail = [2,4,6,8,10,12,14];
@@ -129,6 +133,7 @@ function generateFakeChart(){
 }
 
 function generateFakeChart2(){
+  // this is for generating a fake test case with the data stated below
     console.log('mexi fake 2')
     const fakeLabels = ['1day','2day','3day','4day','5day','6day','7day']
     const fakePass = [3,3,3,3,3,3,3];
@@ -138,7 +143,7 @@ function generateFakeChart2(){
 
 }
 
-generateFakeChart();
+generateFakeChart(); // comment this out in prodoction when Ajax works
 // setTimeout(function() {
 //     generateFakeChart2();
 //   }, 2000);
