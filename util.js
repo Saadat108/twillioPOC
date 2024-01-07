@@ -50,7 +50,7 @@ async function getChartData(twilioData, dateRangeAndData){
         var status = data.status;
         var indexOfDateInDateRangeArray = dateRangeAndData.dates.indexOf(date);
         if(status==='delivered'){
-            dateRangeAndData.dadeliveredCountPerDateArray[indexOfDateInDateRangeArray]++;
+            dateRangeAndData.deliveredCountPerDateArray[indexOfDateInDateRangeArray]++;
             totalDelivered++;
         }
         if(status==='undelivered'){

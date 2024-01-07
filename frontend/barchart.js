@@ -70,6 +70,11 @@ function initiateChart(labels, dataPass, dataFail, dataGoing){
         data: data,
         options: {
           // Chart configuration options
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
     });
     
@@ -113,11 +118,13 @@ function generateChart(labels, dataPass, dataFail, dataGoing){
     if (Object.keys(chartState).length == 0) {
         initiateChart(labels, dataPass, dataFail, dataGoing);
     }else{
-        chartState.barChart.labels = labels;
+        console.log('labels new chart:', labels)
+        chartState.barChart.data.labels = labels;
         chartState.barChart.data.datasets[0].data = dataPass;
         chartState.barChart.data.datasets[1].data = dataFail;
         chartState.barChart.data.datasets[2].data = dataGoing;
         chartState.barChart.update()
+        
 
         const totPass = dataPass.reduce((acc,num) => acc+num, 0);
         const totFail = dataFail.reduce((acc,num) => acc+num, 0);
@@ -131,28 +138,29 @@ function generateChart(labels, dataPass, dataFail, dataGoing){
 
 }
 
-function generateFakeChart(){
+async function generate7daysData(){
   // this is for generating a fake test case with the data stated below
-    const fakeLabels = ['1day','2day','3day','4day','5day','6day','7day']
-    const fakePass = [1,3,5,7,9,11,13];
-    const fakeFail = [2,4,6,8,10,12,14];
-    const fakeGoing = [3,1,1,5,11,21,41];
-    generateChart(fakeLabels, fakePass, fakeFail,fakeGoing);
+  const today = new Date();
+  const sevenDaysBeforeToday = new Date(today.getTime() - (7 * 24 * 60 * 60 * 1000));
+  const todayString = today.getFullYear()+'-'+String(today.getMonth() + 1).padStart(2, '0')+'-'+String(today.getDate()).padStart(2, '0');
+  const sevenDaysBeforeTodayString = sevenDaysBeforeToday.getFullYear()+'-'+String(sevenDaysBeforeToday.getMonth() + 1).padStart(2, '0')+'-'+String(sevenDaysBeforeToday.getDate()).padStart(2, '0');
+  await getMessages(sevenDaysBeforeTodayString, todayString);
+  // generateChart(fakeLabels, fakePass, fakeFail,fakeGoing);
        
 }
 
-function generateFakeChart2(){
-  // this is for generating a fake test case with the data stated below
-    console.log('mexi fake 2')
-    const fakeLabels = ['1day','2day','3day','4day','5day','6day','7day']
-    const fakePass = [3,3,3,3,3,3,3];
-    const fakeFail = [1,2,1,8,1,2,1];
-    const fakeGoing = [1,1,1,1,1,1,1];
-    generateChart(fakeLabels, fakePass, fakeFail,fakeGoing);
+// function generateFakeChart2(){
+//   // this is for generating a fake test case with the data stated below
+//     console.log('mexi fake 2')
+//     const fakeLabels = ['1day','2day','3day','4day','5day','6day','7day']
+//     const fakePass = [3,3,3,3,3,3,3];
+//     const fakeFail = [1,2,1,8,1,2,1];
+//     const fakeGoing = [1,1,1,1,1,1,1];
+//     generateChart(fakeLabels, fakePass, fakeFail,fakeGoing);
 
-}
+// }
 
-generateFakeChart(); // comment this out in prodoction when Ajax works
+generate7daysData(); // comment this out in prodoction when Ajax works
 // setTimeout(function() {
 //     generateFakeChart2();
 //   }, 2000);

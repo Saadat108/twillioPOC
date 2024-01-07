@@ -1,5 +1,5 @@
 const accountSid = 'AC8de682d6be137b53ad0a1fef76a02d3e';
-const authToken = '2d64cd1b9f6c42eabbff3d658d96da8b'
+const authToken = 'ae65b8664e60259e4dac07e2d1506330'
 const client = require('twilio')(accountSid, authToken);
 const fromNumber = '+12059645723';
 //done

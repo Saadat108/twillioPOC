@@ -66,6 +66,7 @@ app.post("/sms",async function(req, res){
 });
 
 app.get("/sms", async function(req, res){
+  // console.log('REQ QUWEY: ',req.query);
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   const toNumber = req.query.toNumber;
@@ -79,7 +80,7 @@ app.get("/sms", async function(req, res){
 
   if(endDate){
     const dateSentBeforeArray = endDate.split('-');
-    const dateSentBefore =  new Date(Date.UTC(dateSentBeforeArray[0], dateSentBeforeArray[1]-1, dateSentBeforeArray[2], 24, 0, 0))
+    const dateSentBefore =  new Date(Date.UTC(dateSentBeforeArray[0], dateSentBeforeArray[1]-1, dateSentBeforeArray[2], 23, 59, 59))
     filterObject['dateSentBefore'] = dateSentBefore
   }
 
